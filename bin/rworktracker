@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require File.join(File.dirname(__FILE__),'..','lib','rworktracker.rb')
+
+CONFIGFILE = File.join(File.expand_path(ENV['HOME']),'.rworktracker.yaml')
+
+
+cli = RworkTrackerCli.new(CONFIGFILE)
+if ARGV[0]
+  begin
+    cli.send ARGV[0]
+  rescue Exception => e
+    warn "command #{ARGV[0]} is not available" 
+    cli.help
+  end
+else
+  cli.projects
+end
+
+

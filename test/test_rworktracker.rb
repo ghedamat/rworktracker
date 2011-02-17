@@ -12,7 +12,13 @@ class TestRworkTracker < Test::Unit::TestCase
     rwt.loadYaml
     assert_equal rwt.wdata.class, Hash
   end
-
+  
+  should "say no if starting a nonexisting project" do
+    rwt = RworkTracker.new(@file)
+    rwt.loadYaml
+    assert_equal false,rwt.start('ciao')
+    
+  end
   should "write yaml file" do
     rwt = RworkTracker.new(@file)
     rwt.loadYaml
