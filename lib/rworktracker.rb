@@ -113,7 +113,7 @@ class RworkTracker
   end
 
   def writeYaml
-    File.open(@yamlfile,'w', File::CREAT) do |f|
+    File.open(@yamlfile, File::CREAT|File::TRUNC|File::RDWR) do |f|
       f << YAML::dump(@wdata)
     end
   end
