@@ -168,7 +168,11 @@ class RworkTracker
     @wdata[pro].each_value  do |m|
       m.each_value do |d|
         d.each do |e|
-          total += Time.parse(e['stop']) - Time.parse(e['start']) 
+          if e['stop']
+            total += Time.parse(e['stop']) - Time.parse(e['start'])  
+          elsif started?(pro)
+            total += Time.now - Time.parse(e['start'])
+          end
         end
       end
     end
