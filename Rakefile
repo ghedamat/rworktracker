@@ -14,11 +14,12 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "rworktracker"
   gem.homepage = "http://github.com/ghedamat/rworktracker"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.license = "GPL"
+  gem.summary = %Q{Simple Gem to keep track of your working hours}
+  gem.description = %Q{Simple Gem to keep track of your working hours}
   gem.email = "ghedamat@gmail.com"
   gem.authors = ["ghedamat"]
+  gem.files = FileList["A-Z]*","{bin,lib,test}/**/*",]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
