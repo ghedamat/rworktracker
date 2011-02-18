@@ -2,6 +2,8 @@
 
 A simple tool to keep track of the time you spend working on your projects
 
+This is mostly a simple app used to experiment a bit tdd, simple metaprogrammig etc..
+
 == How it works
 
   $ rworktracker help

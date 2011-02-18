@@ -1,5 +1,26 @@
 require 'yaml'
 require 'time'
+
+# ugly monkeypatch 
+class Hash
+  def project(pro)
+    self[pro]
+  end
+
+  def month
+    self[Time.now.month] ||= Hash.new
+  end
+  def month= m
+    self[Time.now.month]=m
+  end
+  def day
+    self[Time.now.day] ||= []
+  end
+  def day= d 
+    self[Time.now.day]=d
+  end
+end
+
 class RworkTrackerCli
   
   def initialize(file)
@@ -89,6 +110,7 @@ class RworkTrackerCli
   end
 
 end
+
 class RworkTracker
   def initialize(yamlfile = nil)
     @yamlfile = yamlfile
@@ -136,26 +158,20 @@ class RworkTracker
       return false
     end
     rescue 
-      #warn "Ill formed yaml file"
-      #exit
       return false
     end
   end
  
   def start(pro)
     return false unless @wdata[pro]
-    @wdata[pro][@time.month] ||= Hash.new
-    @wdata[pro][@time.month][@time.day] ||= []
-    @wdata[pro][@time.month][@time.day] << { 'start' => @time.to_s }
+    @wdata[pro].month.day << { 'start' => @time.to_s }
     return true
   end
 
   def stop(pro)
     return false unless @wdata[pro]
-    @wdata[pro][@time.month] ||= Hash.new
-    @wdata[pro][@time.month][@time.day] ||= []
-    if @wdata[pro][@time.month][@time.day].last.has_key?('start') and @wdata[pro][@time.month][@time.day].last.has_key?('stop') == false
-      @wdata[pro][@time.month][@time.day].last.merge!({ 'stop' => @time.to_s })
+    if @wdata[pro].month.day.last.has_key?('start') and @wdata[pro].month.day.last.has_key?('stop') == false
+      @wdata[pro].month.day.last.merge!({ 'stop' => @time.to_s })
       return true
     else
       return false
