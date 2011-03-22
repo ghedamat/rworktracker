@@ -2,26 +2,6 @@ require 'yaml'
 require 'time'
 require 'date'
 
-# ugly monkeypatch 
-class Hash
-  def project(pro)
-    self[pro]
-  end
-
-  def month
-    self[Time.now.month] ||= Hash.new
-  end
-  def month= m
-    self[Time.now.month]=m
-  end
-  def day
-    self[Time.now.day] ||= []
-  end
-  def day= d 
-    self[Time.now.day]=d
-  end
-end
-
 class RworkTrackerCli
   
   def initialize(file)
@@ -152,9 +132,7 @@ class RworkTracker
 
   def started?(pro)
     begin
-    lm = @wdata[pro].keys.sort.last
-    ld = @wdata[pro][lm].keys.sort.last
-    if @wdata[pro][lm][ld].last['stop'] == nil
+    if @wdata[pro].last['stop'] == nil
       return true
     else
       return false
@@ -183,15 +161,11 @@ class RworkTracker
   def elapsed(pro)
     return false unless @wdata[pro]
     total = 0
-    @wdata[pro].each_value  do |m|
-      m.each_value do |d|
-        d.each do |e|
-          if e['stop']
-            total += Time.parse(e['stop']) - Time.parse(e['start'])  
-          elsif started?(pro)
-            total += Time.now - Time.parse(e['start'])
-          end
-        end
+    @wdata[pro].each  do |e|
+      if e['stop']
+        total += Time.parse(e['stop']) - Time.parse(e['start'])  
+      elsif started?(pro)
+        total += Time.now - Time.parse(e['start'])
       end
     end
     return total
