@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rworktracker}
-  s.version = "0.0.4"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ghedamat"]
-  s.date = %q{2011-02-18}
+  s.date = %q{2011-03-22}
   s.default_executable = %q{rworktracker}
   s.description = %q{Simple Gem to keep track of your working hours}
   s.email = %q{ghedamat@gmail.com}
