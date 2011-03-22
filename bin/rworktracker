@@ -7,12 +7,12 @@ CONFIGFILE = File.join(File.expand_path(ENV['HOME']),'.rworktracker.yaml')
 
 cli = RworkTrackerCli.new(CONFIGFILE)
 if ARGV[0]
-  begin
+  #begin
     cli.send ARGV[0]
-  rescue Exception => e
-    warn "command #{ARGV[0]} is not available" 
-    cli.help
-  end
+  #rescue Exception => e
+  #  warn "command #{ARGV[0]} is not available" 
+  #  cli.help
+  #end
 else
   cli.projects
 end

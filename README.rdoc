@@ -4,6 +4,11 @@ A simple tool to keep track of the time you spend working on your projects
 
 This is mostly a simple app used to experiment a bit tdd, simple metaprogrammig etc..
 
+UPDATE:
+changed the really messy format I've choosen the first time.. 
+sorry, no script to port old files to new version is present yet
+had to change due to a very stupid bug :P
+
 == How it works
 
   $ rworktracker help

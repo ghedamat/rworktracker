@@ -1,5 +1,6 @@
 require 'yaml'
 require 'time'
+require 'date'
 
 # ugly monkeypatch 
 class Hash
@@ -132,6 +133,7 @@ class RworkTracker
     f = false
     end
     @wdata = ( f == false) ? Hash.new : f
+    #check_status
   end
 
   def writeYaml
@@ -145,7 +147,7 @@ class RworkTracker
   end
 
   def addProject(pro)
-    @wdata[pro] ||= Hash.new
+    @wdata[pro] ||= []
   end
 
   def started?(pro)
@@ -164,14 +166,14 @@ class RworkTracker
  
   def start(pro)
     return false unless @wdata[pro]
-    @wdata[pro].month.day << { 'start' => @time.to_s }
+    @wdata[pro] << { 'start' => @time.to_s }
     return true
   end
 
   def stop(pro)
     return false unless @wdata[pro]
-    if @wdata[pro].month.day.last.has_key?('start') and @wdata[pro].month.day.last.has_key?('stop') == false
-      @wdata[pro].month.day.last.merge!({ 'stop' => @time.to_s })
+    if @wdata[pro].last.has_key?('start') and !@wdata[pro].last.has_key?('stop') 
+      @wdata[pro].last.merge!({ 'stop' => @time.to_s })
       return true
     else
       return false
